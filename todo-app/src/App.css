@@ -1,38 +1,104 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+:root {
+  --body-font: "Nunito Sans", sans-serif;
+
+  --name: "dark";
+  --color-Bg: #252525;
+  --color-Bg2: #212121;
+  --color-Bg3: #181818;
+  --color-Danger: #fe6854;
+  --color-Primary: #7263f3;
+  --color-Primary2: #705df2;
+  --color-Grey0: #f8f8f8;
+  --color-Grey1: #dbe1e8;
+  --color-Grey2: #b2becd;
+  --color-Grey3: #6c7983;
+  --color-White: #fff;
+  --color-Primary-Green: #6fcf97;
+  --color-Primary-GreenGrad: linear-gradient(91deg, #f56693 0, #6fcf97 90.46%);
+  --button-Gradient1: linear-gradient(
+    110.42deg,
+    rgba(107, 190, 146, 0.1) 29.2%,
+    rgba(245, 102, 146, 0.1) 63.56%
+  );
+  --button-Gradient2: linear-gradient(
+    110.42deg,
+    rgba(25, 151, 222, 0.1) 29.2%,
+    rgba(168, 85, 247, 0.1) 63.56%
+  );
+  --button-Gradient3: linear-gradient(
+    110.42deg,
+    rgba(25, 151, 222, 0.1) 29.2%,
+    rgba(168, 85, 247, 0.1) 63.56%
+  );
+  --button-Gradient4: linear-gradient(
+    110.42deg,
+    rgba(168, 85, 247, 0.1) 29.2%,
+    rgba(245, 102, 146, 0.1) 63.56%
+  );
+  --button-Gradient5: linear-gradient(
+    110.42deg,
+    rgba(25, 151, 222, 0.1) 29.2%,
+    rgba(168, 85, 247, 0.1) 63.56%
+  );
+  --button-Gradient6: linear-gradient(
+    110.42deg,
+    rgba(25, 151, 222, 0.1) 29.2%,
+    rgba(168, 85, 247, 0.1) 63.56%
+  );
+  --button-Gradient7: linear-gradient(
+    110.42deg,
+    rgba(41, 25, 222, 0.1) 29.2%,
+    rgba(235, 87, 87, 0.1) 63.56%
+  );
+  --button-Gradient8: linear-gradient(
+    110.42deg,
+    rgba(25, 151, 222, 0.1) 29.2%,
+    rgba(168, 85, 247, 0.1) 63.56%
+  );
+  --button-Gradient9: linear-gradient(
+    110.42deg,
+    rgba(226, 195, 33, 0.1) 29.2%,
+    rgba(247, 104, 85, 0.1) 63.56%
+  );
+  --button-Gradient10: linear-gradient(
+    110.42deg,
+    rgba(235, 87, 87, 0.1) 29.2%,
+    rgba(189, 68, 166, 0.1) 53.82%,
+    rgba(247, 85, 143, 0.1) 63.56%
+  );
+  --button-Gradient11: linear-gradient(
+    110.42deg,
+    rgba(25, 151, 222, 0.1) 29.2%,
+    rgba(168, 85, 247, 0.1) 63.56%
+  );
+  --button-Gradient12: linear-gradient(
+    110.42deg,
+    rgba(226, 195, 33, 0.1) 29.2%,
+    rgba(247, 104, 85, 0.1) 63.56%
+  );
+  --button-Gradient13: linear-gradient(
+    110.42deg,
+    rgba(226, 195, 33, 0.1) 29.2%,
+    rgba(99, 3, 255, 0.1) 63.56%
+  );
+  --button-Gradient14: linear-gradient(
+    110.42deg,
+    rgba(41, 25, 222, 0.1) 29.2%,
+    rgba(235, 87, 87, 0.1) 63.56%
+  );
+  --shadow1: 4px 4px 84px rgba(16, 10, 86, 0.04);
+  --shadow2: 0px 48px 77px rgba(8, 18, 69, 0.07);
+  --shadow3: 0 14px 40px rgb(0 0 0 / 25%);
+  --color-Icons: rgba(249, 249, 249, 0.35);
+  --color-Icons2: rgba(249, 249, 249, 0.75);
+  --color-Icons3: rgba(249, 249, 249, 0.08);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--body-font);
 }
