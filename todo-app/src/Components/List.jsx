@@ -1,7 +1,7 @@
-import React from "react"
-import "./List.css"
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
+import React from "react"
+import "./List.css"
 
 const check = <i class="bx bxs-check-circle"></i>
 

@@ -1,10 +1,10 @@
-import "./App.css"
-import { myTodo } from "./Data/Todo"
-import { useState } from "react"
-import List from "./Components/List"
-import uuid from "react-uuid"
 import { DndContext } from "@dnd-kit/core"
 import { SortableContext } from "@dnd-kit/sortable"
+import { useState } from "react"
+import uuid from "react-uuid"
+import "./App.css"
+import List from "./Components/List"
+import { myTodo } from "./Data/Todo"
 
 function App() {
   const [todo, setTodo] = useState(myTodo)
