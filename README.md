@@ -8,5 +8,5 @@ I created this project to learn and understand about React Hooks, such as, *__us
 - JavaScript
 - React
 
-## Library used
+## Library Used
 - https://dndkit.com (Drag and Drop)
