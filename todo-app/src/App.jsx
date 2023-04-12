@@ -1,6 +1,7 @@
 import { DndContext } from "@dnd-kit/core"
 import { SortableContext } from "@dnd-kit/sortable"
-import React, { useEffect, useState } from "react"
+import { gsap } from "gsap"
+import React, { useEffect, useRef, useState } from "react"
 import uuid from "react-uuid"
 import styled from "styled-components"
 import "./App.css"
@@ -14,6 +15,11 @@ function App() {
   const [todo, setTodo] = useState(myTodo)
   const [value, setValue] = useState("")
   const [toggleGrid, setToggleGrid] = useState(false)
+
+  //refs
+  const todoRef = useRef()
+  const todoCon = useRef()
+  const formRef = useRef()
 
   //Save to Local storage
   const saveToLocalStorage = todo => {
@@ -125,9 +131,31 @@ function App() {
     saveToLocalStorage(newTodos)
   }
 
+  //Animations
+  useEffect(() => {
+    const tl = gsap.timeline({ defaults: { ease: "power1.out", duration: 1 } })
+    tl.fromTo(
+      todoRef.current,
+      { opacity: 0, x: 800 },
+      { opacity: 1, x: 0, duration: 0.5 }
+    )
+      .fromTo(
+        todoCon.current,
+        { opacity: 0, y: 800, scale: 0.5 },
+        { opacity: 1, y: 0, duration: 0.5, scale: 1 },
+        "-=0.5"
+      )
+      .fromTo(
+        formRef.current,
+        { opacity: 0, y: -800, scaleX: 0 },
+        { opacity: 1, y: 0, duration: 0.5, scaleX: 1 },
+        "-=0.1"
+      )
+  }, [])
+
   return (
     <AppStyled grid={toggleGrid}>
-      <form action="" onSubmit={handleSubmit} className="form">
+      <form ref={formRef} action="" onSubmit={handleSubmit} className="form">
         <h1>Today's Tasks</h1>
         <div className="input-container">
           <input
@@ -144,7 +172,7 @@ function App() {
 
       <DndContext onDragEnd={handleTodoDrag}>
         <SortableContext items={todo.map(todo => todo.id)}>
-          <ul className="todo-container">
+          <ul ref={todoCon} className="todo-container">
             <div className="priority-container">
               <div className="toggle-grid">
                 <button onClick={gridHandler}>
@@ -154,7 +182,7 @@ function App() {
               <p>Priority</p>
               <p>High</p>
             </div>
-            <div className="todos">
+            <div ref={todoRef} className="todos">
               {todo.map(todo => {
                 const { id, name, completed } = todo
                 return (

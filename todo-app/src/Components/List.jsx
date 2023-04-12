@@ -1,5 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
+import { gsap } from "gsap"
 import React, { useEffect, useMemo, useRef } from "react"
 import styled from "styled-components"
 import "./List.css"
@@ -7,6 +8,10 @@ import "./List.css"
 function List({ id, name, handleCompleted, removeTodo, grid, completed }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id })
+
+  //refs
+  const todoRef = useRef()
+  const nameRef = useRef()
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -44,6 +49,38 @@ function List({ id, name, handleCompleted, removeTodo, grid, completed }) {
     return randomizeColors()
   }, [])
 
+  //Animations
+  const animateAndRemove = () => {
+    gsap.to(todoRef.current, {
+      duration: 0.5,
+      opacity: 0,
+      y: -20,
+      rotationX: 180,
+      onComplete: () => {
+        removeTodo(id)
+      },
+    })
+  }
+
+  //List items animations
+  useEffect(() => {
+    gsap.from(nameRef.current, {
+      duration: 0.5,
+      opacity: 0,
+      y: 20,
+      rotationX: 180,
+      delay: -0.1,
+      onComplete: () => {
+        gsap.to(nameRef.current, {
+          duration: 0.5,
+          opacity: 1,
+          y: 0,
+          rotationX: 0,
+        })
+      },
+    })
+  }, [completed])
+
   return (
     <ListStyled
       className="lists"
@@ -54,8 +91,8 @@ function List({ id, name, handleCompleted, removeTodo, grid, completed }) {
       {...attributes}
       {...listeners}
     >
-      <li onDoubleClick={() => removeTodo(id)}>
-        <p>{name}</p>
+      <li ref={todoRef} onDoubleClick={animateAndRemove}>
+        <p ref={nameRef}>{name}</p>
       </li>
       <div className="complete-btn" onDoubleClick={() => handleCompleted(id)}>
         <i class="bx bxs-check-circle"></i>
