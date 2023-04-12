@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useRef } from "react"
 import styled from "styled-components"
 import "./List.css"
 
-function List({ id, name, completed, removeTodo }) {
+function List({ id, name, handleCompleted, removeTodo, grid, completed }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id })
 
@@ -50,13 +50,14 @@ function List({ id, name, completed, removeTodo }) {
       style={style}
       colors={randomColorMemo}
       ref={setNodeRef}
+      completed={completed}
       {...attributes}
       {...listeners}
     >
       <li onDoubleClick={() => removeTodo(id)}>
         <p>{name}</p>
       </li>
-      <div className="complete-btn">
+      <div className="complete-btn" onDoubleClick={() => handleCompleted(id)}>
         <i class="bx bxs-check-circle"></i>
       </div>
     </ListStyled>
@@ -73,6 +74,7 @@ const ListStyled = styled.div`
     list-style: none;
     border: 1px solid var(--color-Icons3);
     box-shadow: var(--shadow3);
+    margin-bottom: ${props => (props.grid ? "0" : "1rem")};
     &:hover {
       cursor: pointer;
     }
@@ -81,8 +83,15 @@ const ListStyled = styled.div`
     }
     p {
       font-size: clamp(1rem, 2vw, 1.2rem);
-      color: white;
+      text-decoration: ${props => (props.completed ? "line-through" : "none")};
+      color: ${props =>
+        props.completed ? "var(--color-Primary-Green)" : "var(--color-Grey0)"};
     }
+  }
+
+  .complete-btn {
+    color: ${props =>
+      props.completed ? "var(--color-Primary-Green)" : "var(--color-Icons2)"};
   }
 `
 

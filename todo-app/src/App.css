@@ -110,6 +110,10 @@ body {
   overflow: hidden;
 }
 
+body::-webkit-scrollbar {
+  width: 0px;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -132,7 +136,7 @@ h1 {
   margin: 2rem 0;
   position: relative;
   font-size: clamp(1rem, 2vw, 1.2rem);
-  width: 50%;
+  width: 85%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -194,9 +198,6 @@ input:active,
   border: 1px solid var(--color-Icons3);
 }
 
-.todos {
-}
-
 .priority-container {
   display: flex;
   justify-content: space-between;
@@ -217,7 +218,7 @@ input:active,
 .toggle-grid button {
   padding: 0.5rem 1rem;
   border-radius: 7px;
-  background: var(--color-Primary-Green);
+  background: var(--button-Gradient2);
   border: 1px solid var(--color-Icons3);
   cursor: pointer;
   font-size: clamp(1rem, 2vw, 1.6rem);

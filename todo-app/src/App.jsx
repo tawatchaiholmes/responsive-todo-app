@@ -2,13 +2,18 @@ import { DndContext } from "@dnd-kit/core"
 import { SortableContext } from "@dnd-kit/sortable"
 import { useState } from "react"
 import uuid from "react-uuid"
+import styled from "styled-components"
 import "./App.css"
 import List from "./Components/List"
 import { myTodo } from "./Data/Todo"
 
+const horizonGrid = <i className="fa-solid fa-table-columns"></i>
+const verticalGrid = <i className="fa-solid fa-list-ul"></i>
+
 function App() {
   const [todo, setTodo] = useState(myTodo)
   const [value, setValue] = useState("")
+  const [toggleGrid, setToggleGrid] = useState(false)
 
   // Set the value
   const handleChange = e => {
@@ -31,9 +36,7 @@ function App() {
         completed: false,
       },
     ]
-
     setTodo(newTodo)
-
     //Clear input field
     setValue("")
   }
@@ -70,8 +73,25 @@ function App() {
     }
   }
 
+  // Handle Grid
+  const gridHandler = () => {
+    setToggleGrid(!toggleGrid)
+  }
+
+  // Handle Completed
+  const handleCompleted = id => {
+    const newTodos = todo.map(todo => {
+      if (todo.id === id) {
+        todo.completed = !todo.completed
+      }
+
+      return todo
+    })
+    setTodo(newTodos)
+  }
+
   return (
-    <div className="App">
+    <AppStyled grid={toggleGrid}>
       <form action="" onSubmit={handleSubmit} className="form">
         <h1>Today's Tasks</h1>
         <div className="input-container">
@@ -92,7 +112,9 @@ function App() {
           <ul className="todo-container">
             <div className="priority-container">
               <div className="toggle-grid">
-                <button>Grid</button>
+                <button onClick={gridHandler}>
+                  {toggleGrid ? verticalGrid : horizonGrid}
+                </button>
               </div>
               <p>Priority</p>
               <p>High</p>
@@ -105,8 +127,10 @@ function App() {
                     key={id}
                     id={id}
                     name={name}
+                    grid={toggleGrid}
                     completed={completed}
                     removeTodo={removeTodo}
+                    handleCompleted={handleCompleted}
                   />
                 )
               })}
@@ -117,8 +141,18 @@ function App() {
           </ul>
         </SortableContext>
       </DndContext>
-    </div>
+    </AppStyled>
   )
 }
+
+const AppStyled = styled.div`
+  .todos {
+    display: ${props => (props.grid ? "grid" : "")};
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-column-gap: 1rem;
+    grid-row-gap: ${props => (props.grid ? "0" : "1rem")};
+    transition: all 1s ease;
+  }
+`
 
 export default App
