@@ -91,10 +91,10 @@ function App() {
         <SortableContext items={todo.map(todo => todo.id)}>
           <ul className="todo-container">
             <div className="priority-container">
-              <p>Priority</p>
               <div className="toggle-grid">
                 <button>Grid</button>
               </div>
+              <p>Priority</p>
               <p>High</p>
             </div>
             <div className="todos">
