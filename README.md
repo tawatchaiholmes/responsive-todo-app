@@ -10,4 +10,4 @@ Created this project to learn and understand about React Hooks, such as, *__useE
 
 ## Library Used
 - https://dndkit.com (Drag and Drop)
-- Gsap (Animations)
+- [Gsap](https://greensock.com/gsap/) (Animations)
