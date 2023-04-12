@@ -176,7 +176,7 @@ function App() {
             <div className="priority-container">
               <div className="toggle-grid">
                 <button onClick={gridHandler}>
-                  {toggleGrid ? verticalGrid : horizonGrid}
+                  {toggleGrid ? horizonGrid : verticalGrid}
                 </button>
               </div>
               <p>Priority</p>
@@ -213,8 +213,8 @@ const AppStyled = styled.div`
     display: ${props => (props.grid ? "grid" : "")};
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     grid-column-gap: 1rem;
-    grid-row-gap: ${props => (props.grid ? "0" : "1rem")};
-    transition: all 1s ease;
+    transition: all 0.4s ease;
+    grid-row-gap: ${props => (props.grid ? "1rem" : "0")};
   }
 `
 

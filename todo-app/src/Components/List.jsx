@@ -5,7 +5,7 @@ import React, { useEffect, useMemo, useRef } from "react"
 import styled from "styled-components"
 import "./List.css"
 
-function List({ id, name, handleCompleted, removeTodo, grid, completed }) {
+function List({ id, name, handleCompleted, grid, removeTodo, completed }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id })
 
@@ -88,14 +88,15 @@ function List({ id, name, handleCompleted, removeTodo, grid, completed }) {
       colors={randomColorMemo}
       ref={setNodeRef}
       completed={completed}
+      grid={grid}
       {...attributes}
       {...listeners}
     >
-      <li ref={todoRef} onDoubleClick={animateAndRemove}>
+      <li className="todo__text" ref={todoRef} onDoubleClick={animateAndRemove}>
         <p ref={nameRef}>{name}</p>
       </li>
       <div className="complete-btn" onDoubleClick={() => handleCompleted(id)}>
-        <i class="bx bxs-check-circle"></i>
+        <i className="bx bxs-check-circle"></i>
       </div>
     </ListStyled>
   )
@@ -104,14 +105,14 @@ function List({ id, name, handleCompleted, removeTodo, grid, completed }) {
 const ListStyled = styled.div`
   background: var(--color-Bg2);
   position: relative;
-  li {
+  .todo__text {
     background: ${props => props.colors};
     padding: 1rem 2rem;
     border-radius: 5px;
+    margin-bottom: ${props => (props.grid ? "0" : "1rem")};
     list-style: none;
     border: 1px solid var(--color-Icons3);
     box-shadow: var(--shadow3);
-    margin-bottom: ${props => (props.grid ? "0" : "1rem")};
     &:hover {
       cursor: pointer;
     }
@@ -119,6 +120,7 @@ const ListStyled = styled.div`
       transform: scale(0.98);
     }
     p {
+      word-break: break-all;
       font-size: clamp(1rem, 2vw, 1.2rem);
       text-decoration: ${props => (props.completed ? "line-through" : "none")};
       color: ${props =>
