@@ -13,7 +13,7 @@ function List({ id, name, handleCompleted, removeTodo, grid, completed }) {
     transition,
   }
 
-  // Randomize colors
+  //Randomize colors
   const randomColors = [
     "var(--button-Gradient1)",
     "var(--button-Gradient2)",
@@ -31,7 +31,7 @@ function List({ id, name, handleCompleted, removeTodo, grid, completed }) {
     "var(--button-Gradient14)",
   ]
 
-  // Randomize
+  //Randomize
   const randomizeColors = () => {
     const randomColor =
       randomColors[Math.floor(Math.random() * randomColors.length)]
@@ -39,7 +39,7 @@ function List({ id, name, handleCompleted, removeTodo, grid, completed }) {
     return randomColor
   }
 
-  // Memo
+  //useMemo
   const randomColorMemo = useMemo(() => {
     return randomizeColors()
   }, [])

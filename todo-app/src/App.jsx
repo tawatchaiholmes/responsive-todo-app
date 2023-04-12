@@ -1,6 +1,6 @@
 import { DndContext } from "@dnd-kit/core"
 import { SortableContext } from "@dnd-kit/sortable"
-import { useState } from "react"
+import React, { useEffect, useState } from "react"
 import uuid from "react-uuid"
 import styled from "styled-components"
 import "./App.css"
@@ -15,7 +15,37 @@ function App() {
   const [value, setValue] = useState("")
   const [toggleGrid, setToggleGrid] = useState(false)
 
-  // Set the value
+  //Save to Local storage
+  const saveToLocalStorage = todo => {
+    if (todo) {
+      localStorage.setItem("todo", JSON.stringify(todo))
+    }
+  }
+
+  //Delete from local storage
+  const deleteFromLocalStorage = id => {
+    const filtered = todo.filter(todo => {
+      return todo.id !== id
+    })
+
+    localStorage.setItem("todo", JSON.stringify(filtered))
+  }
+
+  //Retrieve from local storage
+  useEffect(() => {
+    const localTodo = localStorage.getItem("todo")
+    if (localTodo) {
+      setTodo(JSON.parse(localTodo))
+    }
+
+    //Grid from local storage
+    const localGrid = localStorage.getItem("toggleGrid")
+    if (localGrid) {
+      setToggleGrid(JSON.parse(localGrid))
+    }
+  }, [])
+
+  //Set the value
   const handleChange = e => {
     setValue(e.target.value)
   }
@@ -37,12 +67,15 @@ function App() {
       },
     ]
     setTodo(newTodo)
+    //Send to local storage
+    saveToLocalStorage(newTodo)
     //Clear input field
     setValue("")
   }
 
   //Remove Todo
   const removeTodo = id => {
+    deleteFromLocalStorage(id)
     const filteredTodo = todo.filter(todo => {
       return todo.id !== id
     })
@@ -73,12 +106,13 @@ function App() {
     }
   }
 
-  // Handle Grid
+  //Handle Grid
   const gridHandler = () => {
     setToggleGrid(!toggleGrid)
+    localStorage.setItem("toggleGrid", JSON.stringify(!toggleGrid))
   }
 
-  // Handle Completed
+  //Handle Completed
   const handleCompleted = id => {
     const newTodos = todo.map(todo => {
       if (todo.id === id) {
@@ -88,6 +122,7 @@ function App() {
       return todo
     })
     setTodo(newTodos)
+    saveToLocalStorage(newTodos)
   }
 
   return (
