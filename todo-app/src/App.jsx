@@ -90,18 +90,30 @@ function App() {
       <DndContext onDragEnd={handleTodoDrag}>
         <SortableContext items={todo.map(todo => todo.id)}>
           <ul className="todo-container">
-            {todo.map(todo => {
-              const { id, name, completed } = todo
-              return (
-                <List
-                  key={id}
-                  id={id}
-                  name={name}
-                  completed={completed}
-                  removeTodo={removeTodo}
-                />
-              )
-            })}
+            <div className="priority-container">
+              <p>Priority</p>
+              <div className="toggle-grid">
+                <button>Grid</button>
+              </div>
+              <p>High</p>
+            </div>
+            <div className="todos">
+              {todo.map(todo => {
+                const { id, name, completed } = todo
+                return (
+                  <List
+                    key={id}
+                    id={id}
+                    name={name}
+                    completed={completed}
+                    removeTodo={removeTodo}
+                  />
+                )
+              })}
+            </div>
+            <div className="low">
+              <p>Low</p>
+            </div>
           </ul>
         </SortableContext>
       </DndContext>

@@ -1,0 +1,19 @@
+.complete-btn {
+  position: absolute;
+  right: 1%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: clamp(1.2rem, 2vw, 2rem);
+  padding: 0.4rem, 0.9rem;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+}
+
+i {
+  border-radius: 50%;
+  box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.3);
+}
