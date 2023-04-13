@@ -3,17 +3,17 @@ import { v4 as uuid } from "uuid"
 export const myTodo = [
   {
     id: uuid(),
-    name: "Learn React",
+    name: "Demo1",
     completed: false,
   },
   {
     id: uuid(),
-    name: "Learn Firebase",
+    name: "Demo2",
     completed: false,
   },
   {
     id: uuid(),
-    name: "Learn Node",
+    name: "Demo3",
     completed: false,
   },
 ]
