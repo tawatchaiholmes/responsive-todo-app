@@ -62,6 +62,8 @@ function App() {
 
     if (!value || value.length < 3) {
       return alert("Input value must be at least 3 characters")
+    } else if (value.length > 40) {
+      return alert("Input value must be at most 40 characters")
     }
 
     const newTodo = [
@@ -199,9 +201,12 @@ function App() {
               })}
             </div>
             <div className="bottom">
+              <div className="low hide">
+                <p>Low</p>
+              </div>
               <div className="tooltips">
                 <i class="fa-regular fa-circle-question"></i>
-                <div className="content">
+                <div className="content ">
                   <h3> How to use </h3>
                   <p>Add - Click on Add todo</p>
                   <p>Delete - Double click on the text</p>

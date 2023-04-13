@@ -107,7 +107,6 @@ body {
   min-height: 100vh;
   padding: 5rem 25rem;
   background-color: var(--color-Bg3);
-  overflow: hidden;
 }
 
 body::-webkit-scrollbar {
@@ -241,6 +240,7 @@ input:active,
 .bottom {
   padding-top: 0.5rem;
   display: flex;
+  justify-content: space-between;
 }
 
 .tooltips {
@@ -269,8 +269,8 @@ input:active,
   left: 40%;
   transform: translate(-50%, -50%);
   border-radius: 5px;
-  /* visibility: hidden;
-  opacity: 0; */
+  visibility: hidden;
+  opacity: 0;
   transition: 0.5s;
   z-index: 999;
 }
@@ -299,4 +299,8 @@ input:active,
 .tooltips i:hover + .content {
   visibility: visible;
   opacity: 1;
+}
+
+.hide {
+  visibility: hidden;
 }
