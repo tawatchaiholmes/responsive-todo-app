@@ -198,8 +198,20 @@ function App() {
                 )
               })}
             </div>
-            <div className="low">
-              <p>Low</p>
+            <div className="bottom">
+              <div className="tooltips">
+                <i class="fa-regular fa-circle-question"></i>
+                <div className="content">
+                  <h3> How to use </h3>
+                  <p>Add - Click on Add todo</p>
+                  <p>Delete - Double click on the text</p>
+                  <p>Complete - Double click on Check Icon</p>
+                  <p>Drag 'n Drop - Press and drag</p>
+                </div>
+              </div>
+              <div className="low">
+                <p>Low</p>
+              </div>
             </div>
           </ul>
         </SortableContext>

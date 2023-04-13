@@ -237,3 +237,66 @@ input:active,
   font-weight: 600;
   color: var(--color-Primary);
 }
+
+.bottom {
+  padding-top: 0.5rem;
+  display: flex;
+}
+
+.tooltips {
+  margin-top: 1.8rem;
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltips i {
+  color: wheat;
+  border-bottom: 2px dotted;
+  padding: 2px;
+}
+
+.tooltips i:hover {
+  opacity: 0.7;
+}
+
+.content {
+  width: 400px;
+  background: white;
+  padding: 20px;
+  position: absolute;
+  top: -400%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  /* visibility: hidden;
+  opacity: 0; */
+  transition: 0.5s;
+  z-index: 999;
+}
+
+.content h3 {
+  text-transform: uppercase;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.content p {
+  line-height: 1.4;
+}
+
+.content:before {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: white;
+  bottom: 0;
+  left: 50%;
+  transform: rotate(45deg) translateY(50%);
+}
+
+.tooltips i:hover + .content {
+  visibility: visible;
+  opacity: 1;
+}
