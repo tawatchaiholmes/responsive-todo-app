@@ -281,10 +281,6 @@ input:active,
   margin-bottom: 10px;
 }
 
-.content p {
-  line-height: 1.4;
-}
-
 .content:before {
   content: "";
   position: absolute;
