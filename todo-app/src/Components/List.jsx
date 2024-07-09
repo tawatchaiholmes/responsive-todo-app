@@ -1,11 +1,20 @@
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 import { gsap } from "gsap"
-import React, { useEffect, useMemo, useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import styled from "styled-components"
 import "./List.css"
 
-function List({ id, name, handleCompleted, grid, removeTodo, completed }) {
+function List({
+  id,
+  name,
+  handleCompleted,
+  grid,
+  removeTodo,
+  completed,
+  priority,
+  backgroundColorHandler,
+}) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id })
 
@@ -17,37 +26,6 @@ function List({ id, name, handleCompleted, grid, removeTodo, completed }) {
     transform: CSS.Transform.toString(transform),
     transition,
   }
-
-  //Randomize colors
-  const randomColors = [
-    "var(--button-Gradient1)",
-    "var(--button-Gradient2)",
-    "var(--button-Gradient3)",
-    "var(--button-Gradient4)",
-    "var(--button-Gradient5)",
-    "var(--button-Gradient6)",
-    "var(--button-Gradient7)",
-    "var(--button-Gradient8)",
-    "var(--button-Gradient9)",
-    "var(--button-Gradient10)",
-    "var(--button-Gradient11)",
-    "var(--button-Gradient12)",
-    "var(--button-Gradient13)",
-    "var(--button-Gradient14)",
-  ]
-
-  //Randomize
-  const randomizeColors = () => {
-    const randomColor =
-      randomColors[Math.floor(Math.random() * randomColors.length)]
-
-    return randomColor
-  }
-
-  //useMemo
-  const randomColorMemo = useMemo(() => {
-    return randomizeColors()
-  }, [])
 
   //Animations
   const animateAndRemove = () => {
@@ -85,9 +63,10 @@ function List({ id, name, handleCompleted, grid, removeTodo, completed }) {
     <ListStyled
       className="lists"
       style={style}
-      colors={randomColorMemo}
+      colors={"var(--box-color)"}
       ref={setNodeRef}
       completed={completed}
+      priority={priority}
       grid={grid}
       {...attributes}
       {...listeners}
@@ -95,6 +74,12 @@ function List({ id, name, handleCompleted, grid, removeTodo, completed }) {
       <li className="todo__text" ref={todoRef} onDoubleClick={animateAndRemove}>
         <p ref={nameRef}>{name}</p>
       </li>
+      <div
+        className="color-btn"
+        onDoubleClick={() => backgroundColorHandler(id)}
+      >
+        <i className="fa-solid fa-circle"></i>
+      </div>
       <div className="complete-btn" onDoubleClick={() => handleCompleted(id)}>
         <i className="bx bxs-check-circle"></i>
       </div>
@@ -128,7 +113,30 @@ const ListStyled = styled.div`
     }
   }
 
+  .color-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: clamp(1.6rem, 2vw, 1rem);
+    padding: 0.4rem 3rem;
+    font-family: inherit;
+    align-items: left;
+    justify-content: left;
+    color: ${props =>
+      props.priority ? "var(--priority-color)" : "var(--color-Icons2)"};
+  }
   .complete-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    padding: 0.4rem 0.6rem;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: ${props =>
       props.completed ? "var(--color-Primary-Green)" : "var(--color-Icons2)"};
   }

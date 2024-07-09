@@ -62,8 +62,8 @@ function App() {
 
     if (!value || value.length < 3) {
       return alert("Input value must be at least 3 characters")
-    } else if (value.length > 40) {
-      return alert("Input value must be at most 40 characters")
+    } else if (value.length > 80) {
+      return alert("Input value must be at most 80 characters")
     }
 
     const newTodo = [
@@ -72,6 +72,7 @@ function App() {
         id: uuid(),
         name: value,
         completed: false,
+        priority: false,
       },
     ]
     setTodo(newTodo)
@@ -118,6 +119,19 @@ function App() {
   const gridHandler = () => {
     setToggleGrid(!toggleGrid)
     localStorage.setItem("toggleGrid", JSON.stringify(!toggleGrid))
+  }
+
+  //Handle Background color change
+  const backgroundColorHandler = id => {
+    const newTodos = todo.map(todo => {
+      if (todo.id === id) {
+        todo.priority = !todo.priority
+      }
+
+      return todo
+    })
+    setTodo(newTodos)
+    saveToLocalStorage(newTodos)
   }
 
   //Handle Completed
@@ -178,15 +192,17 @@ function App() {
             <div className="priority-container">
               <div className="toggle-grid">
                 <button onClick={gridHandler}>
-                  {toggleGrid ? horizonGrid : verticalGrid}
+                  {toggleGrid ? verticalGrid : horizonGrid}
                 </button>
               </div>
-              <p>Priority</p>
+              <p>
+                <strong>Priority</strong>
+              </p>
               <p>High</p>
             </div>
             <div ref={todoRef} className="todos">
               {todo.map(todo => {
-                const { id, name, completed } = todo
+                const { id, name, completed, priority } = todo
                 return (
                   <List
                     key={id}
@@ -194,8 +210,10 @@ function App() {
                     name={name}
                     grid={toggleGrid}
                     completed={completed}
+                    priority={priority}
                     removeTodo={removeTodo}
                     handleCompleted={handleCompleted}
+                    backgroundColorHandler={backgroundColorHandler}
                   />
                 )
               })}
@@ -208,10 +226,21 @@ function App() {
                 <i class="fa-regular fa-circle-question"></i>
                 <div className="content">
                   <h3> How to </h3>
-                  <p>Add - Click on Add todo</p>
-                  <p>Delete - Double click on the text</p>
-                  <p>Complete - Double click on Check Icon</p>
-                  <p>Drag 'n Drop - Press and drag</p>
+                  <p>
+                    <b>Add</b> - Click on Add todo
+                  </p>
+                  <p>
+                    <b>Delete</b> - Double click on the text
+                  </p>
+                  <p>
+                    <b>Complete</b> - Double click on Check Icon
+                  </p>
+                  <p>
+                    <b>Priority</b> - Double click on Circle Icon
+                  </p>
+                  <p>
+                    <b>Drag 'n Drop</b> - Press and drag
+                  </p>
                 </div>
               </div>
               <div className="low">

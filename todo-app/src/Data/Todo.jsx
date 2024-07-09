@@ -5,16 +5,19 @@ export const myTodo = [
     id: uuid(),
     name: "Demo1",
     completed: false,
+    priority: false,
   },
   {
     id: uuid(),
     name: "Demo2",
     completed: false,
+    priority: false,
   },
   {
     id: uuid(),
     name: "Demo3",
     completed: false,
+    priority: false,
   },
 ]
 
